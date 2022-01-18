@@ -45,18 +45,27 @@ const createMenu = require('../src/restaurant');
 */
 
 describe('10 - Implemente os casos de teste e a função `createMenu`', () => {
+  const theObject = createMenu({
+    food: { coxinha: 3.9, sanduiche: 9.9 },
+    drinks: { agua: 3.9, cerveja: 6.9 },
+  });
+  console.log(theObject);
   it('Verifica se a função `createMenu` tem o comportamento esperado', () => {
+    //npm test tests/restaurant.spec.js
     // TESTE 1: Verifique se o retorno da função createMenu() é um objeto que possui a
     // chave fetchMenu, a qual tem como valor uma função.
     // ```
     // const objetoRetornado = createMenu(); // Retorno: { fetchMenu: () => {}, ... }
     // ```
+    expect(typeof(theObject)).toBe('object');
+    expect(theObject).toMatchObject(fetchMenu());
     // TESTE 2: Verifique se 'objetoRetornado.fetchMenu()' retorna um objeto cujas chaves são somente `food` e `drink`, 
     // considerando que a função createMenu() foi chamada com o objeto: `{ food: {}, drink: {} }`.
     // ```
     // const objetoRetornado = createMenu({ food: {}, drink: {} });
     // objetoRetornado.fetchMenu() // Retorno: { food: {}, drink: {}}
     // ```
+    expect(Object.keys(theObject)).toEqual(['food', 'drinks',]);
     // TESTE 3: Verifique se o menu passado pra função createMenu é identico ao menu recuperado pela função 'objetoRetornado.fetchMenu'
     // ```
     // const objetoRetornado = createMenu(objetoQualquer);

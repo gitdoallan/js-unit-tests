@@ -84,13 +84,13 @@ const createMenu = (menuObj) => {
     fetchMenu: () => menuObj,
     consumption: [],
     order: [],
-    pay: () => orderTotal
-  }
+    pay: 0,
+  };
   const restaurant = (order) => {
     meuRestaurante.order = [order];
     meuRestaurante.consumption.push(order);
     return order;
-  }
+  };
   restaurant('coxinha');
   restaurant('coxinha');
   restaurant('cerveja');
@@ -102,7 +102,7 @@ const createMenu = (menuObj) => {
     const theConsumption = meuRestaurante.consumption;
     let theBill = 0;
     let position = 0;
-    for (let i=0; i<theConsumption.length; i+=1) {
+    for (let i = 0; i < theConsumption.length; i += 1) {
       if (foodList.indexOf(theConsumption[i]) >= 0) {
         position = foodList.indexOf(theConsumption[i]);
         theBill += foodValue[position];
@@ -112,12 +112,14 @@ const createMenu = (menuObj) => {
         theBill += drinkValue[position];
       }
     }
-    theBill = ((theBill*10/100) + theBill).toFixed(2);
+    theBill = (((theBill * 10) / 100) + theBill).toFixed(2);
+    meuRestaurante.pay = theBill;
     return theBill;
-  }
+  };
   console.log(meuRestaurante.fetchMenu());
-  console.log(orderTotal(Object.entries(meuRestaurante)))
+  // console.log(orderTotal(Object.entries(meuRestaurante)));
+  console.log(orderTotal());
 };
-createMenu({ food: {'coxinha': 3.9, 'sopa': 9.9}, drink: {'agua': 3.9, 'cerveja': 6.9} });
+createMenu({ food: { coxinha: 3.9, sopa: 9.9 }, drink: { agua: 3.9, cerveja: 6.9 } });
 
 module.exports = createMenu;
