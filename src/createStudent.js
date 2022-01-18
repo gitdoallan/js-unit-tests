@@ -15,13 +15,13 @@
     estudante.feedback() // Retorna: 'Eita pessoa boa!'
 */
 
-const createStudent = (name) => {
-  const feedback = () => { return 'Eita pessoa boa!'; };
-  const estudante = {
-    name: name,
-    feedback: feedback
+const createStudent = (nome) => {
+  function mensagem() { 
+    return 'Eita pessoa boa!'; 
   }
-  console.log(typeof estudante.feedback)
+  const estudante = { 
+    name: nome, feedback: mensagem, 
+  };
   return estudante;
 };
 console.log(createStudent('Leandrão, o Lobo Solitário'));

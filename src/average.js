@@ -16,16 +16,16 @@ const average = (arrayNum) => {
   if (arrayNum.length === 0) {
     return undefined;
   }
-  for (let i in arrayNum) {
+  for (let i = 0; i < arrayNum.length; i += 1) {
     if (typeof arrayNum[i] !== 'number') {
       return undefined;
-    };
+    }
     theSum += arrayNum[i];
-  };
+  }
   if (theSum === 0) {
     return 0;
   }
-  let theAvarage = Math.round(theSum/arrayNum.length);
+  let theAvarage = Math.round(theSum / arrayNum.length);
   return theAvarage;
 };
 console.log(average([-11, 2, 5]));

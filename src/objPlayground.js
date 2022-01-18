@@ -38,17 +38,16 @@ const calculator = (number1, number2) => {
     sum: number1 + number2,
     mult: number1 * number2,
     div: Math.floor(number1 / number2),
-    sub: number1 - number2
+    sub: number1 - number2,
   };
   return theResult;
 };
-console.log(calculator(1,2));
 
 const arrayGenerator = (type, object) => {
   if (type === 'keys') {
     const theObject = Object.keys(object);
     return theObject;
-  };
+  }
   if (type === 'values') {
     const theObject = Object.values(object);
     return theObject;
