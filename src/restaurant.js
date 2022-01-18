@@ -82,8 +82,42 @@
 const createMenu = (menuObj) => {
   const meuRestaurante = {
     fetchMenu: () => menuObj,
+    consumption: [],
+    order: [],
+    pay: () => orderTotal
+  }
+  const restaurant = (order) => {
+    meuRestaurante.order = [order];
+    meuRestaurante.consumption.push(order);
+    return order;
+  }
+  restaurant('coxinha');
+  restaurant('coxinha');
+  restaurant('cerveja');
+  const foodList = Object.keys(meuRestaurante.fetchMenu().food);
+  const drinkList = Object.keys(meuRestaurante.fetchMenu().drink);
+  const foodValue = Object.values(meuRestaurante.fetchMenu().food);
+  const drinkValue = Object.values(meuRestaurante.fetchMenu().drink);
+  const orderTotal = () => {
+    const theConsumption = meuRestaurante.consumption;
+    let theBill = 0;
+    let position = 0;
+    for (let i=0; i<theConsumption.length; i+=1) {
+      if (foodList.indexOf(theConsumption[i]) >= 0) {
+        position = foodList.indexOf(theConsumption[i]);
+        theBill += foodValue[position];
+      }
+      if (drinkList.indexOf(theConsumption[i]) >= 0) {
+        position = drinkList.indexOf(theConsumption[i]);
+        theBill += drinkValue[position];
+      }
+    }
+    theBill = ((theBill*10/100) + theBill).toFixed(2);
+    return theBill;
   }
   console.log(meuRestaurante.fetchMenu());
+  console.log(orderTotal(Object.entries(meuRestaurante)))
 };
-console.log(createMenu({ food: {'coxinha': 3.9, 'sopa': 9.9}, drink: {'agua': 3.9, 'cerveja': 6.9} }));
+createMenu({ food: {'coxinha': 3.9, 'sopa': 9.9}, drink: {'agua': 3.9, 'cerveja': 6.9} });
+
 module.exports = createMenu;
