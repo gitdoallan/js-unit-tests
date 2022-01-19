@@ -84,21 +84,15 @@ const createMenu = (menuObj) => {
     fetchMenu: () => menuObj,
     consumption: [],
     order: [],
-    pay: 0,
-  };
-  const restaurant = (order) => {
-    meuRestaurante.order = [order];
-    meuRestaurante.consumption.push(order);
-    return order;
-  };
-  restaurant('coxinha');
-  restaurant('coxinha');
-  restaurant('cerveja');
-  const foodList = Object.keys(meuRestaurante.fetchMenu().food);
-  const drinkList = Object.keys(meuRestaurante.fetchMenu().drink);
-  const foodValue = Object.values(meuRestaurante.fetchMenu().food);
-  const drinkValue = Object.values(meuRestaurante.fetchMenu().drink);
-  const orderTotal = () => {
+    pay: function orderTotal() {
+    // const foodList = Object.keys(meuRestaurante.fetchMenu().food);
+    const foodList = ['coxinha', 'sanduiche'];
+    // const drinkList = Object.keys(meuRestaurante.fetchMenu().drink);
+    const drinkList = ['agua', 'cerveja'];
+    // const foodValue = Object.values(meuRestaurante.fetchMenu().food);
+    const foodValue = [3.90, 6.90];
+    // const drinkValue = Object.values(meuRestaurante.fetchMenu().drink);
+    const drinkValue = [3.9, 6.90];
     const theConsumption = meuRestaurante.consumption;
     let theBill = 0;
     let position = 0;
@@ -113,13 +107,23 @@ const createMenu = (menuObj) => {
       }
     }
     theBill = (((theBill * 10) / 100) + theBill).toFixed(2);
-    meuRestaurante.pay = theBill;
     return theBill;
+    },
   };
-  console.log(meuRestaurante.fetchMenu());
+  const restaurant = (order) => {
+    meuRestaurante.order = [order];
+    meuRestaurante.consumption.push(order);
+    return order;
+  };
+  restaurant('coxinha');
+  restaurant('coxinha');
+  restaurant('cerveja');
+  // console.log(meuRestaurante.fetchMenu());
   // console.log(orderTotal(Object.entries(meuRestaurante)));
-  console.log(orderTotal());
+  console.log(meuRestaurante.pay());
+  // console.log(orderTotal());
+  return meuRestaurante;
 };
-createMenu({ food: { coxinha: 3.9, sopa: 9.9 }, drink: { agua: 3.9, cerveja: 6.9 } });
+console.log(createMenu({ food: { coxinha: 3.9, sopa: 9.9 }, drink: { agua: 3.9, cerveja: 6.9 } }));
 
 module.exports = createMenu;
